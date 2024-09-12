@@ -1,0 +1,10 @@
+<div>
+  <!-- Add an event listener using the () -->
+  <button type="button" (click)="onSelectUser()">
+    <!-- Property binding on src attribute -->
+    <!-- Getter is not written with () -->
+    <img alt="avatar of user" [src]="imagePath" />
+    <!-- String Interpolation between the <span> element -->
+    <span>{{ selectedUsers.name }}</span>
+  </button>
+</div>
