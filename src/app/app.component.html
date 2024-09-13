@@ -1,7 +1,20 @@
 <app-header></app-header>
 <main>
-<ul id="users">
-  <li><app-user></app-user></li>
-</ul>
+  <ul id="users">
+    @for (user of users; track user.id) {
+      <li>
+        <!--
+      The $event variable contains the payload of the emitted output
+      (select) is a custom event emitted by a child component
+        -->
+        <app-user
+          [id]="user.id"
+          [name]="user.name"
+          [avatar]="user.avatar"
+          (select)="onSelectUser($event)"
+        ></app-user>
+      </li>
+    }
+  </ul>
+  <app-task [userID]="selectedUserName"></app-task>
 </main>
-

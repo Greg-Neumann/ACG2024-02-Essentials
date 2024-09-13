@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { DUMMY_USERS } from '../data/dummy-Users';
+import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
 //
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 //
 @Component({
   selector: 'app-user',
@@ -11,17 +9,19 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  selectedUsers = DUMMY_USERS[randomIndex];
+  @Input({ required: true}) id!:string
+  @Input({ required: true }) avatar!: string;
+  @Input({ required: true }) name!: string;
   //
-  // Implement a getter to compute the asset image path for the avatar
+  // avatar = input.required<string>() // this is a signal input
+  // name = input.required<string>()
   //
+  @Output() select = new EventEmitter<string>();
   get imagePath() {
-    return 'assets/users/' + this.selectedUsers.avatar;
+    return 'assets/users/' + this.avatar;
   }
-  //
-  // Method called by DOM event
-  //
   onSelectUser() {
-    console.warn('Clicked!');
+    this.select.emit(this.id)
+    console.warn('Clicked for user of id ' +this.id);
   }
 }
